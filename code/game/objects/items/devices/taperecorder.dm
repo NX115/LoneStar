@@ -163,6 +163,15 @@
 	update_icon()
 
 
+/obj/item/taperecorder/verb/WipeTapeInRecorder()
+	set name = "Wipe Tape"
+
+	mytape.used_capacity = 0;
+	mytape.storedinfo = new;
+	mytape.timestamp = new;
+
+
+
 /obj/item/taperecorder/verb/play()
 	set name = "Play Tape"
 	set category = "Object"
@@ -286,6 +295,18 @@
 	cut_overlay("ribbonoverlay")
 	ruined = 0
 
+/obj/item/tape/proc/wipeproc()
+	used_capacity = 0;
+	storedinfo = new;
+	timestamp = new;
+
+
+/obj/item/tape/verb/wipeverb()
+	set name = "Wipe Tape";
+	if(ruined)
+		wipeproc()
+	else if(!ruined)
+		to_chat(usr, "<span class='notice'>You need to pull out the tape's magnetic strips first.")
 
 /obj/item/tape/attackby(obj/item/I, mob/user, params)
 	if(ruined && istype(I, /obj/item/screwdriver) || istype(I, /obj/item/pen))
@@ -301,3 +322,4 @@
 /obj/item/tape/random/New()
 	icon_state = "tape_[pick("white", "blue", "red", "yellow", "purple")]"
 	..()
+
