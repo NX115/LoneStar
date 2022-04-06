@@ -20,7 +20,6 @@
 	var/panel_open = FALSE
 	var/canprint = 1
 
-
 /obj/item/taperecorder/Initialize(mapload)
 	. = ..()
 	if(starting_tape_type)
@@ -54,7 +53,6 @@
 		to_chat(user, "<span class='notice'>You close the maintenance hatch of [src].</span>")
 	return TRUE
 
-
 /obj/item/taperecorder/proc/eject(mob/user)
 	if(mytape)
 		to_chat(user, "<span class='notice'>You remove [mytape] from [src].</span>")
@@ -82,7 +80,6 @@
 			return TRUE
 	return FALSE
 
-
 /obj/item/taperecorder/verb/ejectverb()
 	set name = "Eject Tape"
 	set category = "Object"
@@ -93,7 +90,6 @@
 		return
 
 	eject(usr)
-
 
 /obj/item/taperecorder/update_icon_state()
 	if(!mytape)
@@ -162,15 +158,12 @@
 		T.visible_message("<font color=Maroon><B>Tape Recorder</B>: Playback stopped.</font>")
 	update_icon()
 
-
 /obj/item/taperecorder/verb/WipeTapeInRecorder()
 	set name = "Wipe Tape"
 
 	mytape.used_capacity = 0;
 	mytape.storedinfo = new;
 	mytape.timestamp = new;
-
-
 
 /obj/item/taperecorder/verb/play()
 	set name = "Play Tape"
@@ -213,7 +206,6 @@
 	playing = 0
 	update_icon()
 
-
 /obj/item/taperecorder/attack_self(mob/user)
 	if(!mytape || mytape.ruined)
 		return
@@ -221,7 +213,6 @@
 		stop()
 	else
 		record()
-
 
 /obj/item/taperecorder/verb/print_transcript()
 	set name = "Print Transcript"
@@ -249,11 +240,9 @@
 	sleep(300)
 	canprint = 1
 
-
 //empty tape recorders
 /obj/item/taperecorder/empty
 	starting_tape_type = null
-
 
 /obj/item/tape
 	name = "tape"
@@ -282,14 +271,12 @@
 		to_chat(user, "<span class='notice'>You pull out all the tape!</span>")
 		ruin()
 
-
 /obj/item/tape/proc/ruin()
 	//Lets not add infinite amounts of overlays when our fireact is called
 	//repeatedly
 	if(!ruined)
 		add_overlay("ribbonoverlay")
 	ruined = 1
-
 
 /obj/item/tape/proc/fix()
 	cut_overlay("ribbonoverlay")
@@ -299,7 +286,6 @@
 	used_capacity = 0;
 	storedinfo = new;
 	timestamp = new;
-
 
 /obj/item/tape/verb/wipeverb()
 	set name = "Wipe Tape";
